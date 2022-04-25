@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Amount</title>
+  </head>
+  <body>
+    <div id="navbar">
+      <h1>Add Money to wallet</h1>
+      <h1 id="wallet"></h1>
+      <!-- Display the wallet amount here inside h1 tag with id as "wallet". Note only amount, no extra text. Like 500 not Rs 500 -->
+    </div>
+    <div id="add-money">
+      <!-- input box for accepting money with id as "amount" -->
+      <input type="number" id="amount" />
+      <!-- button with id as "add_to_wallet" -->
+      <button id="add_to_wallet" onclick="addtoWallet()">Add To Wallet</button>
+      <!-- button with id as "book_movies" to go to movies.html -->
+      <button id="book_movies" onclick="window.location.href='movies.html'">Book Movies</button>
+    </div>
+  </body>
+</html>
+<script>
+  let walletarr = [];
+
+  function addtoWallet() {
+    let amount = Number(document.getElementById("amount").value);
+    walletarr.push(amount);
+
+    let sum = walletarr.reduce(function (a, b) {
+      return parseFloat(a) + parseFloat(b);
+    }, 0);
+
+    localStorage.setItem("wallet", JSON.stringify(sum));
+    document.getElementById("amount").value = "";
+  }
+
+  const walletamount = JSON.parse(localStorage.getItem("wallet"))
+  document.getElementById("wallet").textContent = walletamount
+</script>
